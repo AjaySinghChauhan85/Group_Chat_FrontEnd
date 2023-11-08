@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Registration from "./Pages/Registration";
+import Login from "./Pages/Login";
+import PageNotFound from "./Pages/PageNotFound";
+import DashBoard from "./Pages/DashBoard";
+import { useEffect, useState } from "react";
 
-function App() {
+const App = () => {
+  const [userToken,setUserToken] = useState(null);
+   useEffect(()=>{
+       const userToken = localStorage.getItem("token")
+      //  console.log(userToken);
+       setUserToken(userToken);
+   },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={userToken ?<Navigate to="/dashboard"/> :<Registration/>  } />
+        <Route path="/login" element={userToken ?<Navigate to="/dashboard"/> :<Login/>  } />
+        <Route path="/dashboard" element={userToken ?<DashBoard/> :<Navigate to="/"/>  } />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
