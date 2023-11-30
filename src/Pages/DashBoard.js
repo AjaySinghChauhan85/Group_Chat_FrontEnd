@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const DashBoard = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
+  const fetchMessagesData = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/sendMessage");
+      setMessages(response.data.messages || []);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchMessagesData();
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
