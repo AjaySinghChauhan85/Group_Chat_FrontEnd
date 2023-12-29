@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: #25d366;
+  padding: 15px;
+  border-radius: 10px 0 0 0;
+  box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-bottom a {
+  text-decoration: none;
+  color: #ffffff; /* White text */
+}
+
+.fixed-bottom svg {
+  fill: #ffffff; /* White color for the SVG icon */
+  margin-right: 8px;
+  height: 30px;
+  width: 30px;
+}
